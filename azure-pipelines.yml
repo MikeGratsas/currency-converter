@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: Maven@3
+  displayName: 'Maven Package'
   inputs:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
@@ -20,3 +21,13 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to artifact staging directory'
+  inputs:
+     SourceFolder: '$(System.DefaultWorkingDirectory)'
+     Contents: '**/target/*.?(war|jar)'
+     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: drop
