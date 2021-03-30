@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/sharpimg/Currency%20Converter/_apis/build/status/MikeGratsas.currency-converter?branchName=main)](https://dev.azure.com/sharpimg/Currency%20Converter/_build/latest?definitionId=22&branchName=main)
+
 # currency-converter
 Currency conversion implementation using Spring Boor REST API
 
