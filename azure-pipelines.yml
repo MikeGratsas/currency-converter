@@ -20,7 +20,6 @@ steps:
     projectVersion: '$(Build.BuildNumber)'
     scannerMode: 'Other'
     extraProperties:  |
-     sonar.branch.name=main
      sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
 
 - task: Maven@3
