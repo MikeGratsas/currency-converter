@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- main
+- '*'
 
 pool:
   vmImage: ubuntu-latest
@@ -20,7 +20,7 @@ steps:
     projectVersion: '$(Build.BuildNumber)'
     scannerMode: 'Other'
     extraProperties:  |
-     sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
+     sonar.coverage.jacoco.xmlReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.jacoco.xml
 
 - task: Maven@3
   displayName: 'Maven Package'
@@ -36,6 +36,7 @@ steps:
     effectivePomSkip: false
     sonarQubeRunAnalysis: true
     isJacocoCoverageReportXML: true
+    codeCoverageToolOption: 'jaCoCo'
     sqMavenPluginVersionChoice: 'latest'
     goals: 'package'
 
@@ -43,12 +44,14 @@ steps:
   displayName: 'Publish SonarCloud quality gate results'
   inputs:
     pollingTimeoutSec: '300'
+
 - task: CopyFiles@2
   displayName: 'Copy Files to artifact staging directory'
   inputs:
      SourceFolder: '$(System.DefaultWorkingDirectory)'
      Contents: '**/target/*.?(war|jar)'
      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 - task: WhiteSource Bolt@20
   displayName: 'Run WhiteSource Bolt'
   inputs:
