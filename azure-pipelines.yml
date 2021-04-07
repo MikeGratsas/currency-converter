@@ -17,7 +17,7 @@ steps:
     scannerMode: 'Other'
     organization: '$(SonarOrganization)'
     extraProperties:  |
-     sonar.projectKey='$(SonarProjectKey)'
+     sonar.projectKey=$(SonarProjectKey)
      sonar.coverage.jacoco.xmlReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.jacoco.xml
 
 - task: Maven@3
@@ -28,7 +28,7 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
+    jdkVersionOption: '1.11'
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
