@@ -17,6 +17,7 @@ steps:
     scannerMode: 'Other'
     organization: '$(SonarOrganization)'
     extraProperties:  |
+     sonar.projectKey='$(SonarProjectKey)'
      sonar.coverage.jacoco.xmlReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.jacoco.xml
 
 - task: Maven@3

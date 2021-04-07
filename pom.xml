@@ -12,7 +12,7 @@
 	<artifactId>currency-converter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>currency-converter</name>
+	<name>Currency Converter</name>
 	<description>Currency Converter project for Spring Boot</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
