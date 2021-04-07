@@ -20,7 +20,7 @@ steps:
     cliProjectName: '$(SonarProjectName)'
     cliProjectKey: '$(SonarProjectKey)'
     cliProjectVersion: '$(Build.BuildNumber)'
-    cliSources: '.'
+    cliSources: 'src'
     extraProperties:  |
      sonar.coverage.jacoco.xmlReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.jacoco.xml
 
