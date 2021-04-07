@@ -9,10 +9,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bankera</groupId>
-	<artifactId>currencyconverter</artifactId>
+	<artifactId>currency-converter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>currencyconverter</name>
+	<name>currency-converter</name>
 	<description>Currency Converter project for Spring Boot</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
