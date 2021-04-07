@@ -52,7 +52,7 @@ public class ExchangeRateController {
 		} catch (ExchangeRateNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), e);
 		}
-		return new ResponseEntity<ExchangeRateModel>(model, HttpStatus.OK);
+		return ResponseEntity.ok(model);
 	}
 
 	@GetMapping(path = "/exchangerates/currency/{currencyCode}")
@@ -63,13 +63,12 @@ public class ExchangeRateController {
 		} catch (CurrencyNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), e);
 		}
-		return new ResponseEntity<ExchangeRateModel>(model, HttpStatus.OK);
+		return ResponseEntity.ok(model);
 	}
 
 	@GetMapping(path = "/exchangerates")
 	public ResponseEntity<List<ExchangeRateModel>> listExchangeRates(final Pageable pageable) {
-		return new ResponseEntity<List<ExchangeRateModel>>(exchangeRateService.listExchangeRatesByPage(pageable),
-				HttpStatus.OK);
+		return ResponseEntity.ok(exchangeRateService.listExchangeRatesByPage(pageable));
 	}
 
 	@PostMapping("/exchangerates")
@@ -81,7 +80,7 @@ public class ExchangeRateController {
 		} catch (DataIntegrityViolationException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getLocalizedMessage(), e);
 		}
-		return new ResponseEntity<ExchangeRateModel>(model, HttpStatus.CREATED);
+		return ResponseEntity.status(HttpStatus.CREATED).body(model);
 	}
 
 	@PutMapping(path = "/exchangerates")
@@ -89,22 +88,22 @@ public class ExchangeRateController {
 			@Valid @RequestBody final ExchangeRateModel exchangeRateModel) {
 		try {
 			final ExchangeRateModel model = exchangeRateService.saveExchangeRate(exchangeRateModel);
-			return new ResponseEntity<ExchangeRateModel>(model, HttpStatus.OK);
+			return ResponseEntity.ok(model);
 		} catch (ExchangeRateNotFoundException e) {
-			return new ResponseEntity<ExchangeRateModel>(HttpStatus.NOT_FOUND);
+			return ResponseEntity.notFound().build();
 		} catch (ExchangeRateUpdatedException e) {
-			return new ResponseEntity<ExchangeRateModel>(HttpStatus.CONFLICT);
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		}
 	}
 
 	@DeleteMapping(path = "/exchangerates/{id}")
-	public ResponseEntity<ExchangeRateModel> deleteExchangeRateById(@PathVariable("id") final Long id) {
+	public ResponseEntity<Long> deleteExchangeRateById(@PathVariable("id") final Long id) {
 		try {
 			exchangeRateService.deleteExchangeRates(new Long[] { id });
 		} catch (EmptyResultDataAccessException e) {
-			return new ResponseEntity<ExchangeRateModel>(HttpStatus.NOT_FOUND);
+			return ResponseEntity.notFound().build();
 		}
-		return new ResponseEntity<ExchangeRateModel>(HttpStatus.OK);
+		return ResponseEntity.ok(id);
 	}
 
 	@GetMapping(path = "/exchangerates/export", produces = "text/csv")
@@ -125,7 +124,7 @@ public class ExchangeRateController {
 				final Stream<ExchangeRateModel> stream = CsvHandler.readExchangeRates(reader);
 				final List<ExchangeRateModel> exchangeRates = stream
 						.map(model -> exchangeRateService.updateExchangeRate(model)).collect(Collectors.toList());
-				return new ResponseEntity<List<ExchangeRateModel>>(exchangeRates, HttpStatus.OK);
+				return ResponseEntity.ok(exchangeRates);
 			} catch (Exception e) {
 				throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getLocalizedMessage(), e);
 			}

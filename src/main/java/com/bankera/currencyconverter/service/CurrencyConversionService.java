@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.bankera.currencyconverter.exceptions.CurrencyNotFoundException;
 import com.bankera.currencyconverter.form.CurrencyConversionModel;
 import com.bankera.currencyconverter.form.ExchangeRateModel;
-import com.bankera.currencyconverter.repository.ExchangeRateRepository;
 
 @Service
 public class CurrencyConversionService {

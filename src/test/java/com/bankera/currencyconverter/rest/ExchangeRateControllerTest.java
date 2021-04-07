@@ -17,22 +17,22 @@ import com.bankera.currencyconverter.form.ExchangeRateModel;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ExchangeRateControllerTest {
+class ExchangeRateControllerTest {
 
     @Autowired
 	private TestRestTemplate template;
     
     @BeforeEach
-	public void setUp() throws Exception {
+	void setUp() throws Exception {
     	Assertions.assertNotNull(template);
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception {
+	void tearDown() throws Exception {
 	}
 
 	@Test
-    public void testExchangeRate()
+    void testExchangeRate()
     {
 		HttpEntity<Object> exchangeRateEntity = getHttpEntity("{\"currencyCode\": \"RUB\", \"rate\": \"-0.01138952164\" }");
 		ResponseEntity<ExchangeRateModel> response = template.postForEntity("/api/exchangerates", exchangeRateEntity, ExchangeRateModel.class);

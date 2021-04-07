@@ -25,13 +25,13 @@ import com.bankera.currencyconverter.form.ExchangeRateModel;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CurrencyConversionControllerTest {
+class CurrencyConversionControllerTest {
 
     @Autowired
 	private TestRestTemplate template;
     
     @BeforeEach
-	public void setUp() throws Exception {
+	void setUp() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
@@ -51,11 +51,11 @@ public class CurrencyConversionControllerTest {
 	}
 
 	@AfterEach
-	public void tearDown() throws Exception {
+	void tearDown() throws Exception {
 	}
 
 	@Test
-    public void testConvertCurrency()
+    void testConvertCurrency()
     {
         ResponseEntity<BigDecimal> response = template.getForEntity("/api/currency-converter/from/{from}/to/{to}?quantity={quantity}", BigDecimal.class, "EUR", "USD", 10000);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

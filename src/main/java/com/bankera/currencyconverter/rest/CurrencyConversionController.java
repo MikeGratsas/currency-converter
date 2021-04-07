@@ -28,7 +28,7 @@ public class CurrencyConversionController {
 		} catch (CurrencyNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getLocalizedMessage(), e);
 		}
-		return new ResponseEntity<BigDecimal>(model.getTotalCalculatedAmount(), HttpStatus.OK);
+		return ResponseEntity.ok(model.getTotalCalculatedAmount());
 	}
 
 }
