@@ -14,13 +14,8 @@ steps:
   displayName: 'Prepare SonarCloud analysis'
   inputs:
     SonarCloud: 'SonarCloud connection'
-    scannerMode: 'CLI'
-    configMode: 'manual'
+    scannerMode: 'Other'
     organization: '$(SonarOrganization)'
-    cliProjectName: '$(SonarProjectName)'
-    cliProjectKey: '$(SonarProjectKey)'
-    cliProjectVersion: '$(Build.BuildNumber)'
-    cliSources: 'src'
     extraProperties:  |
      sonar.coverage.jacoco.xmlReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.jacoco.xml
 
