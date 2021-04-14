@@ -66,9 +66,19 @@ class ExchangeRateControllerTest {
 		response = template.exchange("/api/exchangerates", HttpMethod.PUT, exchangeRateEntity, ExchangeRateModel.class);
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 
+		exchangeRateEntity = getHttpEntity("{\"id\": \"0\",\"currencyCode\": \"RUB\", \"rate\": \"0.01139521647\" }");
+		response = template.exchange("/api/exchangerates", HttpMethod.PUT, exchangeRateEntity, ExchangeRateModel.class);
+		Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
 		template.delete("/api/exchangerates/{id}", id);
 
+		ResponseEntity<Long> result = template.exchange("/api/exchangerates/{id}", HttpMethod.DELETE, null, Long.class, id);
+		Assertions.assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+
 		response = template.getForEntity("/api/exchangerates/{id}", ExchangeRateModel.class, id);
+		Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
+		response = template.getForEntity("/api/exchangerates/currency/{currencyCode}", ExchangeRateModel.class, currencyCode);
 		Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
      
