@@ -43,11 +43,6 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.jacoco.xml'
-
 - task: CopyFiles@2
   displayName: 'Copy Files to artifact staging directory'
   inputs:
