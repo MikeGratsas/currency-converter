@@ -20,7 +20,7 @@ steps:
      sonar.projectKey=$(SonarProjectKey)
      sonar.coverage.jacoco.xmlReportPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.jacoco.xml
 
-- task: Maven@3
+- task: Maven@4
   displayName: 'Maven Package'
   inputs:
     mavenPomFile: 'pom.xml'
@@ -50,7 +50,7 @@ steps:
      Contents: '**/target/*.?(war|jar)'
      TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: WhiteSource Bolt@20
+- task: WhiteSource@21
   displayName: 'Run WhiteSource Bolt'
   inputs:
     cwd: '$(System.DefaultWorkingDirectory)'
