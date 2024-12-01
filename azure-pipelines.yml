@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: SonarCloudPrepare@1
+- task: SonarCloudPrepare@3
   displayName: 'Prepare SonarCloud analysis'
   inputs:
     SonarCloud: 'SonarCloud connection'
@@ -38,7 +38,7 @@ steps:
     sqMavenPluginVersionChoice: 'latest'
     goals: 'package'
 
-- task: SonarCloudPublish@1
+- task: SonarCloudPublish@3
   displayName: 'Publish SonarCloud quality gate results'
   inputs:
     pollingTimeoutSec: '300'
