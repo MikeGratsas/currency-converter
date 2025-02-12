@@ -45,7 +45,7 @@ public class ExchangeRateController {
 	private ExchangeRateService exchangeRateService;
 
 	@GetMapping(path = "/exchangerates/{id}")
-	public ResponseEntity<ExchangeRateModel> getExchangeRateById(@PathVariable("id") final Long id) {
+	public ResponseEntity<ExchangeRateModel> getExchangeRateById(@PathVariable final Long id) {
 		ExchangeRateModel model;
 		try {
 			model = exchangeRateService.findExchangeRate(id);
@@ -97,7 +97,7 @@ public class ExchangeRateController {
 	}
 
 	@DeleteMapping(path = "/exchangerates/{id}")
-	public ResponseEntity<Long> deleteExchangeRateById(@PathVariable("id") final Long id) {
+	public ResponseEntity<Long> deleteExchangeRateById(@PathVariable final Long id) {
 		try {
 			exchangeRateService.deleteExchangeRates(new Long[] { id });
 		} catch (EmptyResultDataAccessException e) {
@@ -115,7 +115,7 @@ public class ExchangeRateController {
 
 	@PostMapping(path = "/exchangerates/import", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<List<ExchangeRateModel>> importExchangeRatesCSV(@RequestParam("file") MultipartFile file) {
+	public ResponseEntity<List<ExchangeRateModel>> importExchangeRatesCSV(@RequestParam MultipartFile file) {
 		if (file.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT);
 		} else {
